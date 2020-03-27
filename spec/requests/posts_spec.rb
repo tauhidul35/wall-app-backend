@@ -51,11 +51,19 @@ RSpec.describe 'Posts API', type: :request do
 
   # Test suite for POST /posts
   describe 'POST /api/v1/posts' do
-    # valid payload
     let(:valid_attributes) { { message: 'Learn Elm' } }
+    let(:headers) { {auth_token: login} }
 
-    context 'when the request is valid' do
+    context 'when not logged in user' do
       before { post '/api/v1/posts', params: valid_attributes }
+
+      it 'creates a post' do
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context 'with valid parameters' do
+      before { post '/api/v1/posts', params: valid_attributes, headers: headers }
 
       it 'creates a post' do
         expect(json['message']).to eq('Learn Elm')
@@ -66,8 +74,8 @@ RSpec.describe 'Posts API', type: :request do
       end
     end
 
-    context 'when the request is invalid' do
-      before { post '/api/v1/posts', params: { } }
+    context 'with invalid parameters' do
+      before { post '/api/v1/posts', params: { }, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -83,9 +91,18 @@ RSpec.describe 'Posts API', type: :request do
   # Test suite for PUT /posts/:id
   describe 'PUT /api/v1/posts/:id' do
     let(:valid_attributes) { { message: 'Shopping' } }
+    let(:headers) { {auth_token: login} }
 
-    context 'when the record exists' do
+    context 'when not logged in user' do
       before { put "/api/v1/posts/#{post_id}", params: valid_attributes }
+
+      it 'updates the record' do
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context 'when logged in user' do
+      before { put "/api/v1/posts/#{post_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -99,10 +116,22 @@ RSpec.describe 'Posts API', type: :request do
 
   # Test suite for DELETE /posts/:id
   describe 'DELETE /api/v1/posts/:id' do
-    before { delete "/api/v1/posts/#{post_id}" }
+    let(:headers) { {auth_token: login} }
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+    context 'when not logged in user' do
+      before { delete "/api/v1/posts/#{post_id}" }
+
+      it 'delete a post' do
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context 'when logged in user' do
+      before { delete "/api/v1/posts/#{post_id}", headers: headers }
+
+      it 'delete a post' do
+        expect(response).to have_http_status(204)
+      end
     end
   end
 end
