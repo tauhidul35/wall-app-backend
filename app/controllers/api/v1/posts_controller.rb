@@ -5,7 +5,7 @@ class Api::V1::PostsController < Api::ApplicationController
   # GET /api/v1/posts
   def index
     posts = Post.all.map do |post|
-      { id: post.id, message: post.message }
+      { id: post.id, content: post.content }
     end
 
     json_response posts
@@ -38,7 +38,7 @@ class Api::V1::PostsController < Api::ApplicationController
 
   def post_params
     # whitelist params
-    params.permit(:message)
+    params.permit(:content)
   end
 
   def set_post

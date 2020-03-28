@@ -1,3 +1,3 @@
 class Post < ApplicationRecord
-  validates_presence_of :message
+  validates_presence_of :content
 end

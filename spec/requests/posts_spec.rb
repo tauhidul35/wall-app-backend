@@ -51,7 +51,7 @@ RSpec.describe 'Posts API', type: :request do
 
   # Test suite for POST /posts
   describe 'POST /api/v1/posts' do
-    let(:valid_attributes) { { message: 'Learn Elm' } }
+    let(:valid_attributes) { { content: 'Learn Elm' } }
     let(:headers) { {auth_token: login} }
 
     context 'when not logged in user' do
@@ -66,7 +66,7 @@ RSpec.describe 'Posts API', type: :request do
       before { post '/api/v1/posts', params: valid_attributes, headers: headers }
 
       it 'creates a post' do
-        expect(json['message']).to eq('Learn Elm')
+        expect(json['content']).to eq('Learn Elm')
       end
 
       it 'returns status code 201' do
@@ -83,14 +83,14 @@ RSpec.describe 'Posts API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-            .to match(/Validation failed: Message can't be blank/)
+            .to match(/Validation failed: Content can't be blank/)
       end
     end
   end
 
   # Test suite for PUT /posts/:id
   describe 'PUT /api/v1/posts/:id' do
-    let(:valid_attributes) { { message: 'Shopping' } }
+    let(:valid_attributes) { { content: 'Shopping' } }
     let(:headers) { {auth_token: login} }
 
     context 'when not logged in user' do
