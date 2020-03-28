@@ -23,8 +23,8 @@ class AuthorizeApiRequest
   end
 
   def http_auth_header
-    if headers['auth_token'].present?
-      return headers['auth_token'].split(' ').last
+    if headers['HTTP_AUTH_TOKEN'].present?
+      return headers['HTTP_AUTH_TOKEN'].split(' ').last
     else
       errors.add(:token, 'Missing token')
     end

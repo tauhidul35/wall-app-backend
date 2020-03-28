@@ -52,7 +52,7 @@ RSpec.describe 'Posts API', type: :request do
   # Test suite for POST /posts
   describe 'POST /api/v1/posts' do
     let(:valid_attributes) { { content: 'Learn Elm' } }
-    let(:headers) { {auth_token: login} }
+    let(:headers) { {HTTP_AUTH_TOKEN: login} }
 
     context 'when not logged in user' do
       before { post '/api/v1/posts', params: valid_attributes }
@@ -91,7 +91,7 @@ RSpec.describe 'Posts API', type: :request do
   # Test suite for PUT /posts/:id
   describe 'PUT /api/v1/posts/:id' do
     let(:valid_attributes) { { content: 'Shopping' } }
-    let(:headers) { {auth_token: login} }
+    let(:headers) { {HTTP_AUTH_TOKEN: login} }
 
     context 'when not logged in user' do
       before { put "/api/v1/posts/#{post_id}", params: valid_attributes }
@@ -116,7 +116,7 @@ RSpec.describe 'Posts API', type: :request do
 
   # Test suite for DELETE /posts/:id
   describe 'DELETE /api/v1/posts/:id' do
-    let(:headers) { {auth_token: login} }
+    let(:headers) { {HTTP_AUTH_TOKEN: login} }
 
     context 'when not logged in user' do
       before { delete "/api/v1/posts/#{post_id}" }
