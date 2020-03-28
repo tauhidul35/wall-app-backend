@@ -1,4 +1,5 @@
 class Api::V1::PostsController < Api::ApplicationController
+  skip_before_action :authenticate_request, only: [:index, :show]
   before_action :set_post, only: [:show, :update, :destroy]
 
   # GET /api/v1/posts
