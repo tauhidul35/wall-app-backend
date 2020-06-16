@@ -14,7 +14,7 @@ class Api::V1::PostsController < Api::ApplicationController
   # POST /api/v1/posts
   def create
     post = Post.create!(post_params)
-    json_response(post, :created)
+    json_response({id: post.id, content: post.content}, :created)
   end
 
   # GET /api/v1/posts/:id
