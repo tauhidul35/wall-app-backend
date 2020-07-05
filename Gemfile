@@ -14,7 +14,7 @@ gem 'puma', '~> 4.3'
 # gem 'redis', '~> 4.0'
 
 gem 'devise', '~> 4.7.1'
-gem 'jwt', '~> 2.2.1'
+gem 'devise-jwt', '~> 0.7.0'
 gem 'simple_command', '~> 0.1.0'
 
 # Use Active Storage variant
@@ -24,7 +24,7 @@ gem 'simple_command', '~> 0.1.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

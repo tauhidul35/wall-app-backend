@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :validatable
-         #, :confirmable, :lockable, :timeoutable, :trackable, :omniauthable, :rememberable
-
-  validates :email, presence: true, uniqueness: true
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :validatable, :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
+         #, :confirmable, :lockable, :timeoutable, :trackable, :omniauthable
 end

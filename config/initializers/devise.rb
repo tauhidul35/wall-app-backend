@@ -8,7 +8,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'dc0c30c5ec08b721a5ecfc97d0973846cbacdea6be5840080afdb179e39ffb6e1ce0fded49d6dd5735eb6f4b4ba3c086a330338ea4f4d7777d134c3b5ec15809'
+  config.secret_key = '3080ea10647545a0c80071b30bdac8082da75b4f4e2cb9f6c0c817dc06cc157f593c481faa54b2ac12f3082aae9d84c14ec14e117e7c918db197ea09ffb9dee5'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -18,7 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'admin@wall-app.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -88,7 +88,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:http_auth, :params_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -251,7 +251,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = [:json]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -296,4 +296,21 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # ==> Configuration for JWT
+  #
+  config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_SECRET_KEY']
+
+    jwt.dispatch_requests = [
+        ['POST', %r{^/login$}]
+    ]
+
+    jwt.revocation_requests = [
+        ['DELETE', %r{^/logout$}]
+    ]
+
+    jwt.request_formats = { user: [:json] }
+    jwt.expiration_time = 1.day.to_i
+  end
 end
