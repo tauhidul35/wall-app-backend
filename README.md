@@ -16,22 +16,13 @@ Wall App is a demo application build with Ruby on Rails. Users can visit the wal
 
 ## Technical Specs
 
-- Language: 
+- Language: [Ruby](https://www.ruby-lang.org/en/)
 
-  [Ruby]: https://www.ruby-lang.org/en/
+- Framework: [Ruby on Rails](https://rubyonrails.org/)
 
-- Framework: 
+- Authentication Library: [Devise](https://github.com/heartcombo/devise), [jwt](https://github.com/jwt/ruby-jwt)
 
-  [Ruby on Rails]: https://rubyonrails.org/
-
-- Authentication Library: 
-
-  [Devise]: https://github.com/heartcombo/devise
-  [jwt]: https://github.com/jwt/ruby-jwt
-
-- Automation Testing Tool: 
-
-  [RSpec]: https://github.com/rspec/rspec-rails
+- Automation Testing Tool: [RSpec](https://github.com/rspec/rspec-rails)
 
 
 
@@ -52,7 +43,9 @@ Wall App is a demo application build with Ruby on Rails. Users can visit the wal
 ### Registration:
 
 **URL:** *{{base_url}}/api/v1/register*
+
 **Method:** POST
+
 **Parameters:**
 
 | Key      | Type   | Required | Example            |
@@ -62,8 +55,11 @@ Wall App is a demo application build with Ruby on Rails. Users can visit the wal
 | password | String | True     | "12345678"         |
 
 **Success response:**
+
 status_code: 201
+
 response_body: 
+
 ```json
 {
     "user": {
@@ -75,7 +71,9 @@ response_body:
 ```
 
 **Error response:**
+
 Status code: 406
+
 Response Body:
 
 ```json
@@ -90,7 +88,9 @@ Response Body:
 ### Login:
 
 **URL:** *{{base_url}}/api/v1/authenticate*
+
 **Method:** POST
+
 **Parameters:**
 
 | Key      | Type   | Required | Example            |
@@ -99,8 +99,11 @@ Response Body:
 | password | String | True     | "12345678"         |
 
 **Success response:**
+
 Status code: 200
+
 Response body:
+
 ```json
 {
     "success": true,
@@ -113,8 +116,11 @@ Response body:
 ```
 
 **Error response:**
+
 Status code: 401
+
 Response body:
+
 ```json
 {
     "success": false,
@@ -127,7 +133,9 @@ Response body:
 ### Create Post:
 
 **URL:** *{{base_url}}/api/v1/posts*
+
 **Method:** POST
+
 **Headers:**
 
 | Key        | Type   | Required | Example                                                      |
@@ -141,8 +149,11 @@ Response body:
 | content | String | True     | "Test content" |
 
 **Success response:**
+
 Status_code: 201
+
 Response body:
+
 ```
 {
     "post": {
@@ -154,8 +165,11 @@ Response body:
 ```
 
 **Error response:**
+
 Status_code: 401
+
 Response body:
+
 ```json
 {
     "success": false,
@@ -168,7 +182,9 @@ Response body:
 ### Get All Posts:
 
 **URL:** *{{base_url}}/api/v1/posts*
+
 **Method:** GET
+
 **Headers:**
 
 | Key        | Type   | Required | Example                                                      |
@@ -178,7 +194,9 @@ Response body:
 **Parameters:** No params required
 
 Success response:
+
 Status_code: 200
+
 Response body:
 
 ```json
@@ -206,7 +224,9 @@ Response body:
 ### Get single post:
 
 **URL:** *{{base_url}}/api/v1/posts/:id*
+
 **Method:** GET
+
 **Headers:**
 
 | Key        | Type   | Required | Example                                                      |
@@ -216,8 +236,11 @@ Response body:
 **Parameters:** No parameters required
 
 **Success response:**
+
 Status code: 201
+
 Response body:
+
 ```json
 {
     "post": {
@@ -231,8 +254,11 @@ Response body:
 ```
 
 **Error response:**
+
 Status_code: 404
-Response body:
+
+szxResponse body:
+
 ```json
 {
     "success": false,
@@ -244,7 +270,9 @@ Response body:
 ### Update Post:
 
 **URL:** *{{base_url}}/api/v1/posts/:id*
+
 **Method:** PUT
+
 **Headers:**
 
 | Key        | Type   | Required | Example                                                      |
@@ -258,8 +286,11 @@ Response body:
 | content | String | True     | "Test content updated" |
 
 **Success response:**
+
 Status_code: 202
+
 Response body:
+
 ```json
 {
     "post": {
@@ -274,8 +305,11 @@ Response body:
 ```
 
 **Error response:**
+
 Status_code: 401
+
 Response body:
+
 ```json
 {
     "success": false,
@@ -284,7 +318,9 @@ Response body:
 ```
 
 Status_code: 404
+
 Response body:
+
 ```json
 {
     "success": false,
@@ -295,7 +331,9 @@ Response body:
 ### Delete Post:
 
 **URL:** *{{base_url}}/api/v1/posts/:id*
+
 **Method:** DELETE
+
 **Headers:**
 
 | Key        | Type   | Required | Example                                                      |
@@ -305,7 +343,9 @@ Response body:
 **Parameters:** No parameters required
 
 **Success response:**
+
 Status_code: 202
+
 ```json
 {
     "post": {
@@ -317,7 +357,9 @@ Status_code: 202
 ```
 
 Error response:
+
 Status_code: 401
+
 ```json
 {
     "success": false,
@@ -326,6 +368,7 @@ Status_code: 401
 ```
 
 Status_code: 404
+
 ```json
 {
     "success": false,
