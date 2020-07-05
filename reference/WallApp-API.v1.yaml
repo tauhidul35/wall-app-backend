@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: WallApp API
+  version: '1.0'
+  contact:
+    name: Tauhidul Islam
+    email: tauhidul35@gmail.com
+    url: 'https://misfit.tech'
+  description: This is a demo project where uses can post on a common wall after register. Guest uses can visit wall as well.
+servers:
+  - url: 'http://localhost:3000'
+    description: Local
+paths:
+  /api/v1/register:
+    post:
+      summary: Registration
+      operationId: post-api-v1-register
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                  success:
+                    type: boolean
+              examples:
+                example-1:
+                  value:
+                    user:
+                      email: test@example.com
+                      name: Tauhidul Islam
+                    success: true
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    success: false
+                    messages: Email has already been taken
+      description: User Signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  name: Tauhidul Islam
+                  email: test@example.com
+                  password: '12345678'
+      tags:
+        - registration
+  /api/v1/authenticate:
+    post:
+      summary: ''
+      operationId: post-api-v1-authenticate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                  auth_token:
+                    type: string
+                  success:
+                    type: boolean
+              examples:
+                example-1:
+                  value:
+                    success: true
+                    user:
+                      email: test@example.com
+                      name: Tauhidul Islam
+                    auth_token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHBpcnkiOjE1OTM5Njk3NjR9.EKmMC2x-IFHP-Xr1FBdZyGPU6l28Flaojbcgp0ka0Is
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    success: false
+                    message: Invalid email or password
+      description: User Authentication or signin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  email: test@example.com
+                  password: '12345678'
+      tags:
+        - Authentication
+components:
+  schemas: {}
+  securitySchemes: {}
+tags:
+  - name: registration
+  - name: Authentication
