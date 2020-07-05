@@ -5,16 +5,9 @@ class Api::V1::RegistrationsController < Api::ApplicationController
     user = User.create(sign_up_params)
 
     if user.errors.present?
-      json_response({
-                        success: false,
-                        messages: user.errors.full_messages.join('. ')
-                    }, :not_acceptable)
+      error_response(user.errors.full_messages.join('. '))
     else
-      json_response({
-                        success: true,
-                        user: user.slice(:email, :name),
-                        messages: find_message(:signed_up)
-                    }, :created)
+      success_response({user: user.slice(:email, :name)}, :created)
     end
   end
 
